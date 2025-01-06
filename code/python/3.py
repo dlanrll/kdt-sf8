@@ -19,7 +19,7 @@ print(float(10), type(float(10))) # 정수 10을 실수로 변환
 #print(int("name"))
 print(int("11.2"))
 
-b = 2 #정수형
+b = 2 #정수형 = int
 print(b*10) #20
 print(str(b)*10) #"2"*10 > 2222222222
 print(str(b)+"입니다")
@@ -39,8 +39,8 @@ print("평균 :", avg_score)
 
 
 # 1번
-name = input("이름을 입력하세요: ")
-age = input("나이를 입력하세요: ")
+name = input("이름을 입력하세요: ") #코드 실행시 터미널에 input값 입력 가능하게 커서가 깜빡임
+age = input("나이를 입력하세요: ")  #터미널에 input값, 즉 질문에 대한 답을 하고, print를 할 시 input해준 값이 출력되는 것
 print(f"안녕하세요! {name}님 ({age}세)")
 
 # 2번
