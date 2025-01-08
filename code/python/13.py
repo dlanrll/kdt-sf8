@@ -51,10 +51,13 @@ print("과목별 평균 점수:")
 for subject, avg in averages.items():
     print(f"{subject}: {avg:.2f}점")
 
-    total_sum = sum(number)
-    print(f"1부터 {number}까지의 합: {total_sum}")
+    total_sum = sum(averages)
+    print(f"1부터 {averages}까지의 합: {total_sum}")
 
 
 '''if와 elif의 차이는 if와 elif를 동시에 썼을 때 그 조건이 중첩일 경우 다음 코드로 내려가지 않음
 결론 : 조건들이 겹치지 않는(상호베타적) 상황일 때는 if, elif, else를 작성해도 되지만
 그렇지 않을 경우에는 if를 작성할 것'''
+
+# 학점 평균내기 아이고 강사님 코드
+
