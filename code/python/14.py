@@ -1,5 +1,4 @@
 # 이중 for문
-'''
 for i in range(5) :
     print(f"외부 반목문의 i값 : {i}")
 
@@ -38,7 +37,7 @@ for row in matrix2:
     for elem in row:
         if elem % 2 == 0:
             print(elem, end = " ")
-'''
+
 # 구구단 실습
 for i in range(2, 10):
     print(f"[{i}단]")

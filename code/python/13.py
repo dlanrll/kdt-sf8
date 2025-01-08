@@ -60,4 +60,3 @@ for subject, avg in averages.items():
 그렇지 않을 경우에는 if를 작성할 것'''
 
 # 학점 평균내기 아이고 강사님 코드
-
