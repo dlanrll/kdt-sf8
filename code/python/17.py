@@ -2,6 +2,7 @@
 # 기본 매개변수
 # 주의, 기본값이 있는 매개변수는 반드시 맨 뒤에 와야함
 # + 설명을 덧붙이자면 만약 print(8)만 오면 이게 txt인지 count의 값인지 컴퓨터는 인지하지 못하니까~
+"""
 def pr_str(txt, count):
     print(txt, count)
 
@@ -71,3 +72,111 @@ def print_info(**kwargs):
 
 print_info(name="홍길동", city = "서울", gender = "남자")
 print_info(name="성추냥", city = "부산", age = 81)
+
+
+# 과제...
+vending_machine = ['게토레이', '게토레이', '레쓰비', '레쓰비', '생수', '생수', '생수', '이프로']
+
+def display_vending_machine():
+    print("남은 음료수:", vending_machine)
+
+def consumer_action():
+    drink = input("마시고 싶은 음료를 입력하세요: ")
+    if drink in vending_machine:
+        vending_machine.remove(drink)
+        print(f"{drink}를 드립니다.")
+    else:
+        print("해당 음료는 없습니다.")
+
+def owner_action():
+    action = input("1. 추가, 2. 삭제 (번호 입력): ")
+    if action == "1":
+        new_drink = input("추가할 음료 이름: ")
+        vending_machine.append(new_drink)
+        print(f"{new_drink}가 추가되었습니다.")
+    elif action == "2":
+        remove_drink = input("삭제할 음료 이름: ")
+        if remove_drink in vending_machine:
+            vending_machine.remove(remove_drink)
+            print(f"{remove_drink}가 삭제되었습니다.")
+        else:
+            print(f"{remove_drink}는 자판기에 없습니다.")
+    else:
+        print("잘못된 입력입니다.")
+
+while True:
+    display_vending_machine()
+    user_type = input("1. 소비자, 2. 주인 (번호 입력): ")
+    if user_type == "1":
+        consumer_action()
+    elif user_type == "2":
+        owner_action()
+    else:
+        print("잘못된 입력입니다.")
+    
+    if input("계속하시겠습니까? (y/n): ").lower() != 'y':
+        print("프로그램을 종료합니다.")
+        break
+
+
+"""
+
+vending_machine = ['게토레이', '게토레이', '레쓰비', '레쓰비', '생수', '생수', '생수', '이프로']
+
+def display_vending_machine():
+    print(f"남은 음료수: {vending_machine}")
+
+def consumer_action():
+    drink = input("마시고 싶은 음료를 입력하세요: ")
+    if drink in vending_machine:
+        vending_machine.remove(drink)
+        print(f"{drink}를 드릴게요.")
+    else:
+        print("해당 음료는 없습니다.")
+    display_vending_machine()
+
+def owner_action():
+    print("할 일을 선택하세요:")
+    print("1. 추가")
+    print("2. 삭제")
+    action = input("선택: ")
+
+    if action == "1": 
+        new_drink = input("추가할 음료 이름을 입력하세요: ")
+        vending_machine.append(new_drink)
+        print(f"{new_drink}가 추가되었습니다.")
+    elif action == "2": 
+        remove_drink = input("삭제할 음료 이름을 입력하세요: ")
+        if remove_drink in vending_machine:
+            vending_machine.remove(remove_drink)
+            print(f"{remove_drink}가 삭제되었습니다.")
+        else:
+            print(f"{remove_drink}는 자판기에 없습니다.")
+    else:
+        print("잘못된 입력입니다.")
+    display_vending_machine()
+
+def main():
+    while True:
+        display_vending_machine()
+        print("사용자 종류를 입력하세요:")
+        print("1. 소비자")
+        print("2. 주인")
+        user_type = input("선택: ")
+
+        if user_type == "1":
+            consumer_action()
+        elif user_type == "2":
+            owner_action()
+        else:
+            print("잘못된 입력입니다. 1 또는 2를 입력해주세요.")
+
+        continue_program = input("계속하시겠습니까? (y/n): ")
+        if continue_program.lower() != 'y':
+            print("프로그램을 종료합니다.")
+            break
+
+if __name__ == "__main__":
+    main()
+
+
