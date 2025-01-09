@@ -25,8 +25,13 @@ print(pow(3, 4))
 
 # 만약에, pow() 내장함수가 없었다ㅁㄴ?
 
+city = "서울"
+x = [["서울", 10], ["서울", 20], ["부산", 30]]
+a = filter(lambda x : x[0] == city, x)
+print(list(map(lambda x: x[1], a)))
 
-
+i = 3.333333333
+print(f"{i:.2f}")
 # 실습
 
 multiples = [] 
