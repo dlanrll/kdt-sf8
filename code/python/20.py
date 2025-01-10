@@ -111,7 +111,8 @@ def add_weather_data():
 
 # 전체 데이터 출력
 def print_all_data():
-    print("현재 저장된 날씨 데이터:")
+    print("\n현재 저장된 날씨 데이터:")
+    
     for entry in weather_data:
         print(f"날짜: {entry[0]}, 도시: {entry[1]}, 평균 기온: {entry[2]}℃, 강수량: {entry[3]}mm")
 
