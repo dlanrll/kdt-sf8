@@ -1,5 +1,5 @@
 # MRO
-'''
+
 class A :
     def speak(slef):
         print("A 클래스")
@@ -24,28 +24,3 @@ print(D.mro()) # D > B > C > A > object
 
 # 다중상속의 유의점 : 이름이 충돌 문제가 있다
 
-'''
-
-
-
-# 다중 상속
-class Engine:
-    def __init__(self, horsepower):
-        self.horsepower = horsepower
-
-
-class Wheels:
-    def __init__(self, wheel_count):
-        self.wheel_count = wheel_count
-
-
-class Car(Engine, Wheels):  # 다중상속
-    def __init__(self, horsepower, wheel_count):
-        # 부모클래스의 생성자를 호출해서 horsepower, wheel_count 를 초기화
-        Engine.__init__(self, horsepower)
-        Wheels.__init__(self, wheel_count)
-
-    def info(self):
-        print(
-            f"이 자동차는 {self.horsepower} 마력과 {self.wheel_count} 개의 바퀴를 가짐"
-        )
