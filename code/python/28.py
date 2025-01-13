@@ -37,7 +37,7 @@ class Animal:
 
 # 자식 클래스
 class Cat(Animal):
-    def __init__(self, name, sound):
+    def __init__(self, name, sound = "냐옹"):
         super().__init__(name) # 부모클래스 생성자호출
         # name 속성은 부모 클래스에 전달해 name을 설정
         self.sound = sound # 자식 클래스에서 sound 속성 설정
@@ -50,3 +50,11 @@ cat = Cat("장화", "캬아악")
 cat.meow()
 cat.move()
 cat.speak()
+
+cat2 = Cat("나비")
+cat2.meow()
+cat2.move()
+cat2.speak()
+
+
+
