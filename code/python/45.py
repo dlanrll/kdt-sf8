@@ -37,14 +37,50 @@
 # with open("user.txt", "r", encoding="utf-8") as file:
 #     print(file.readlines()) # 파일을 리스트형태로 반환
 
-with open("user.txt", "r", encoding="utf-8") as file:
-    line = file.readline()
-    while line:
-        print(line.strip())
-        line = file.readline()
+# with open("user.txt", "r", encoding="utf-8") as file:
+#     line = file.readline()
+#     while line:
+#         print(line.strip())
+#         line = file.readline()
 
 # str = "                    문자열                        "
 # print(f"[{str.strip()}]")  # 양쪽공백제거
 # print(f"[{str.rstrip()}]")  # 우측공백제거
 # print(f"[{str.lstrip()}]")  # 좌측공백제거
 
+
+# enumerate() # 리스트를 튜플형태로 반환, 반환값이 두개
+with open("user.txt", "r", encoding="utf-8") as file:
+    lines = file.readlines()
+    # (0, "동해물과\n"), (1, "백두산이\n") <= ["동해물과\n", "백두산이\n"]
+    for idx, value in enumerate(lines):
+        print(f"{idx}인덱스의 값은 {value.strip()}입니다.")
+
+# ==================바이너리 파일=======================
+# with open("owl.png", "rb") as file:
+#     # data = file.read()
+#     # print(f"{len(data)} 바이트")
+#     header = file.read(10) # 파일확장자를 찾는 방법
+#     print(f"{header}")
+
+
+def files(file_path):
+    with open(file_path, "rb") as file:
+        header = file.read(4)  # 4바이트가 확장자의 매직넘버
+        # print(header)
+        if header == b"\x89PNG":  # png는 첫 4바이트가 89 50 4e 47
+            return "png"
+        elif header[:2] == b"\xff\xd8":  # jpg는 2바이트이때문에 뒤에 2바이트를 삭제
+            return "jpg"
+        else:
+            return "unknown"
+
+
+print(files("owl.png"))
+
+# # 바이너리파일 쓰기
+# with open("owl.png", "rb") as file:
+#     data = file.read()
+
+# with open("owl_copy.png", "wb") as file:
+#     file.write(data)
