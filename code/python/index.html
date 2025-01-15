@@ -5,15 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-       /* * {
-            color: red
-        }
-        li {
-            color: blue;
-        }*/
-        .orange {
-            color: orange;
-        }
+      /* * {
+        color: red;
+      } 
+      li {
+        color: blue;
+      }
+      .blue {
+        color: blue;
+      }
+      .orange {
+        color: orange;
+      }
+      #orange {
+        color: red;
+      }
+      일치선택자  
+      span.orange {
+        color: orange;
+      }
+      자식선택자
+      ul > .orange {
+        color: orangered;
+      }
+      후손선택자
+      div .orange {
+        color: red;
+      }
+      형제선택자(하나)
+      .orange + li {
+        color: orchid;
+      }
+      전체형제선택자
+      .orange ~ li {
+        color: purple;
+      }
+        */
     </style>
   </head>
   <body>
@@ -73,7 +100,7 @@
     </div>
     <div>
       <button>클릭하세요</button>
-    </div> -->
+    </div>
     <div>
       <select>
         <option value="korea">대한민국</option>
@@ -103,23 +130,20 @@
           </tr>
         </tbody>
       </table>
+    </div>  -->
+
+    <!-- 선택자 연습 -->
+    <div>
+      <ul>
+        <li>사과</li>
+        <li id="orange">딸기</li>
+        <li class="orange">오렌지</li>
+        <li>망고</li>
+        <li>포도</li>
+      </ul>
+      <div>당근</div>
+      <p>토마토</p>
+      <span class="orange blue">오렌지</span>
     </div>
   </body>
 </html>
-
-
-
-  <!---선택자연습-->
-  <div>
-    <ul>
-        <li>사과</li>
-        <li>딸기</li>
-        <li> id = "orange" class = "orange">오렌지</li>
-    </ul>
-    <div>당근</div>
-    <p>토마토</p>
-    <span>class = "orange">오렌지</span>
-  </div>
-  
-
-
