@@ -166,4 +166,5 @@ for image in images:
             file.write(res.content)
         code += 1
 
-input("")
+# 브라우저 닫기
+driver.quit()
