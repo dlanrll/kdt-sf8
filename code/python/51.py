@@ -1,46 +1,169 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-def github_login_and_crawl(username, password, user_id):
-    # WebDriver 초기화 (Chrome)
-    driver = webdriver.Chrome()  # 크롬 드라이버 경로를 지정해 주세요.
-    driver.get("https://github.com/login")
+### 실습 Github 로그인 후, 정보 가지고 오기
+
+def crawling(username, password, user_id):
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     
     try:
-        # 로그인 페이지에서 사용자 이름 및 비밀번호 입력
-        login_field = driver.find_element(By.ID, "login_field")
-        password_field = driver.find_element(By.ID, "password")
-        login_field.send_keys(username)
-        password_field.send_keys(password)
-        password_field.send_keys(Keys.RETURN)  # Enter 키로 로그인
+        driver.get("https://github.com/login")
+        time.sleep(2) 
+        
+        driver.find_element(By.ID, "login_field").send_keys(username)  
+        driver.find_element(By.ID, "password").send_keys(password)  
+        driver.find_element(By.ID, "password").send_keys(Keys.RETURN)  
+        
+        time.sleep(3) 
 
-        time.sleep(3)  # 로그인 처리 대기
-
-        # 로그인 성공 여부 확인
-        if "Sign out" in driver.page_source:
-            print("로그인 성공!")
+        current_url = driver.current_url 
+        if "github.com" in current_url and "session" not in current_url:
+            print("로그인 성공")
         else:
             print("로그인 실패")
             return
 
-        # 사용자 프로필 페이지로 이동
-        profile_url = f"https://github.com/{user_id}"
+        profile_url = f"https://github.com/{user_id}" 
         driver.get(profile_url)
+        time.sleep(2) 
 
-        # 사용자 이름 크롤링
-        time.sleep(2)  # 페이지 로드 대기
         name_element = driver.find_element(By.CSS_SELECTOR, "span.p-nickname")
         print("사용자 이름 :", name_element.text.strip())
 
     except Exception as e:
         print(f"오류 발생: {e}")
     finally:
-        # 브라우저 닫기
         driver.quit()
 
-# 실행
-github_login_and_crawl("your_username", "your_password", "choi-yeong")
+
+crawling("ID", "Password", "사용자ID")
 
 
+# 실습 구글 이미지
+
+
+
+
+""" 강사님의 코드, 그냥 참고만 할 것 """
+
+# 실습1. github
+driver.get("https://github.com/login")
+
+driver.find_element(By.ID, "login_field").send_keys("ysdls")
+driver.find_element(By.ID, "password").send_keys("")
+driver.find_element(By.NAME, "commit").click()
+
+name = driver.find_element(
+    By.XPATH,
+    '//*[@id="switch_dashboard_context_left_column-button"]/span[1]/span/span[2]',
+)
+print(f"사용자 이름은 : {name.text}")
+input("")
+
+
+# 실습2. 쇼핑몰
+driver.get("https://www.11st.co.kr/")
+find = driver.find_element(By.CSS_SELECTOR, ".search_text")
+find.send_keys("노트북")
+find.send_keys(Keys.ENTER)
+time.sleep(5)
+
+items = driver.find_elements(By.CSS_SELECTOR, "#section_commonPrd .c-search-list__item")
+
+for item in items:
+    name = item.find_element(By.CSS_SELECTOR, ".c-card-item__name > dd").text
+    price = item.find_element(By.CSS_SELECTOR, ".c-card-item__price > span").text
+    price = int(price.replace(",", ""))
+    if price >= 500000:
+        print(f"상품명: {name}, 가격: {price}")
+
+input("")
+
+
+# 실습3. 여행사이트
+driver.get("https://www.agoda.com/ko-kr?ds=qdL8YSV4z5LoWxHS#rooms")
+time.sleep(2)
+departure = driver.find_element(By.ID, "textInput").send_keys("도쿄")
+search = WebDriverWait(driver, 10).until(
+    EC.visibility_of_element_located(
+        (
+            By.XPATH,
+            '//*[@id="SearchBoxContainer"]/div[1]/div/div[2]/div/div/div[6]/div/div/ul',
+        )
+    )
+)
+search.find_element(By.CSS_SELECTOR, "li:first-child").click()
+# 시작날짜
+click_day = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable(
+        (
+            By.XPATH,
+            '//*[@id="DatePicker__AccessibleV2"]/div/div[2]/div[1]/div[3]/div[5]/div[4]/div/div/div',
+        )
+    )
+)
+click_day.click()
+# 종료날짜
+driver.find_element(
+    By.XPATH,
+    '//*[@id="DatePicker__AccessibleV2"]/div/div[2]/div[2]/div[3]/div[1]/div[7]/div/div/div',
+).click()
+# 인원클릭
+driver.find_element(By.ID, "occupancy-box").click()
+# people = WebDriverWait(driver, 10).until(
+#     EC.element_to_be_clickable((By.ID, "occupancy-box"))
+# )
+# 검색하기 클릭
+search_click = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, '//*[@id="Tabs-Container"]/button'))
+)
+search_click.click()
+
+# 마지막으로 열린 탭으로 전환
+driver.switch_to.window(driver.window_handles[-1])
+
+# 호텔명
+hotel_name = WebDriverWait(driver, 10).until(
+    EC.visibility_of_all_elements_located((By.CSS_SELECTOR, ".hotel-list-container h3"))
+)
+price = WebDriverWait(driver, 10).until(
+    EC.visibility_of_all_elements_located(
+        (By.CSS_SELECTOR, ".hotel-list-container .PropertyCardPrice__Value")
+    )
+)
+print(f"호텔명 : {hotel_name[0].text}, 가격 {price[0].text}")
+input("")
+
+
+# 실습4 구글이미지
+driver.get("https://www.google.com/imghp")
+time.sleep(2)
+
+search = driver.find_element(By.ID, "APjFqb")
+search.send_keys("토끼")
+search.send_keys(Keys.ENTER)
+time.sleep(2)
+
+# 무한스크롤
+for i in range(3):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    time.sleep(2)
+images = driver.find_elements(By.CSS_SELECTOR, "img.YQ4gaf")
+os.makedirs("images", exist_ok=True)  # 폴더신규생성. 존재하면 무시
+
+# print(images)
+code = 1
+for image in images:
+    src = image.get_attribute("src")
+    if "FAVICON" not in src and "https" in src:
+        print(src)
+        res = requests.get(src)
+        with open(f"images/img_{code}.png", "wb") as file:
+            file.write(res.content)
+        code += 1
+
+input("")
