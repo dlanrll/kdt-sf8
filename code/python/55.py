@@ -38,7 +38,7 @@ print(f"5. 특정 운동기구 종류 데이터 필터링 (운동기구: {equipm
 print(filtered_equipment)
 print()
 
-# 6. 운동기구 수량 기준 내림차순 정렬
+# 6. 운동기구 수량 기준 내림차순 정렬.
 sorted_equipment = df.sort_values(by="운동기구 수량", ascending=False)
 print("6. 운동기구 수량 기준 내림차순 정렬")
 print(sorted_equipment)
